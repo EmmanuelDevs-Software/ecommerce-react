@@ -4,19 +4,24 @@ import { connect } from "react-redux";
 import CollectionItem from "../../components/collection-item/collection-item.component";
 import { selectCollection } from "../../redux/shop/shop.reducer";
 import { createStructuredSelector } from "reselect";
+import {
+  CollectionContainer,
+  ItemsContainer,
+  TitleText,
+} from "./collection.styles";
 
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
 
   return (
-    <div className="collection-page">
-      <h2 className="title">{title}</h2>
-      <div className="items">
+    <CollectionContainer>
+      <TitleText>{title}</TitleText>
+      <ItemsContainer>
         {items.map((item) => (
           <CollectionItem key={item.id} item={item} />
         ))}
-      </div>
-    </div>
+      </ItemsContainer>
+    </CollectionContainer>
   );
 };
 
