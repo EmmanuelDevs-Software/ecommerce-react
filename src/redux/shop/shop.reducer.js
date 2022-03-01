@@ -1,19 +1,19 @@
-import { createSelector } from "reselect";
+import ShopActionTypes from './shop.types';
 
-const selectShop = (state) => state.shop;
+const INITIAL_STATE = {
+  collections: null
+};
 
-export const selectCollections = createSelector(
-  [selectShop],
-  (shop) => shop.collections
-);
+const shopReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case ShopActionTypes.UPDATE_COLLECTIONS:
+      return {
+        ...state,
+        collections: action.payload
+      };
+    default:
+      return state;
+  }
+};
 
-export const selectCollectionsForPreview = createSelector(
-  [selectCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
-);
-
-export const selectCollection = (collectionUrlParam) =>
-  createSelector(
-    [selectCollections],
-    (collection) => collection[collectionUrlParam]
-  );
+export default shopReducer;

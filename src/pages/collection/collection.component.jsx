@@ -1,34 +1,32 @@
-import React from "react";
-import "./collection.styles.scss";
-import { connect } from "react-redux";
-import CollectionItem from "../../components/collection-item/collection-item.component";
-import { selectCollection } from "../../redux/shop/shop.reducer";
-import { createStructuredSelector } from "reselect";
+import React from 'react';
+import { connect } from 'react-redux';
+
+import CollectionItem from '../../components/collection-item/collection-item.component';
+
+import { selectCollection } from '../../redux/shop/shop.selectors';
+
 import {
-  CollectionContainer,
-  ItemsContainer,
-  TitleText,
-} from "./collection.styles";
+  CollectionPageContainer,
+  CollectionTitle,
+  CollectionItemsContainer
+} from './collection.styles';
 
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
-
   return (
-    <CollectionContainer>
-      <TitleText>{title}</TitleText>
-      <ItemsContainer>
-        {items.map((item) => (
+    <CollectionPageContainer>
+      <CollectionTitle>{title}</CollectionTitle>
+      <CollectionItemsContainer>
+        {items.map(item => (
           <CollectionItem key={item.id} item={item} />
         ))}
-      </ItemsContainer>
-    </CollectionContainer>
+      </CollectionItemsContainer>
+    </CollectionPageContainer>
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    collection: selectCollection(ownProps.match.params.collectionId)(state),
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  collection: selectCollection(ownProps.match.params.collectionId)(state)
+});
 
 export default connect(mapStateToProps)(CollectionPage);
