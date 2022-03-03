@@ -1,15 +1,13 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
-import Swal from "sweetalert2";
 
 const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
   const publishableKey =
     "pk_test_51KY0aBJdmT4zGBTeC9wDFYB2zBxotOmhd8rccIoIAfuQ1STpmk2jylUMvHI8NzR6ug5wY85z9eY2cWHSNqdH7xn700fkxxv39Y";
-
   const onToken = (token) => {
     console.log(token);
-    Swal.fire("Payment!", "Successfully!", "success");
+    alert("Payment Succesful!");
   };
 
   return (
